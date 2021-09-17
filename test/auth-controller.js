@@ -38,12 +38,12 @@ describe('Auth Controller - Login', function() {
           password: 'tester',
           name: 'test',
           post: [],
-          _id: '5c0f66b979af55031b34728a'
+          _id: '5c0f66b979af55031b34728b'
         })
         return user.save()
       })
       .then(() => {
-        const req = { userId: '5c0f66b979af55031b34728a' }
+        const req = { userId: '5c0f66b979af55031b34728b' }
         const res = {
           statusCode: 500,
           userStatus: null,
@@ -60,7 +60,13 @@ describe('Auth Controller - Login', function() {
           .then(() => {
             expect(res.statusCode).to.be.equal(200)
             expect(res.userStatus).to.be.equal('I am new!')
-            done()
+            User.deleteMany({})
+              .then(() => {
+                return mongoose.disconnect()
+              })
+              .then(() => {
+                done()
+              })
           })
       })
       .catch(err => console.log(err));
