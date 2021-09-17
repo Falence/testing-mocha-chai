@@ -24,6 +24,9 @@ describe('Auth Controller - Login', function() {
       .then(() => {
         done()
       })
+      .catch(err => {
+        console.log(err)
+      })
   })
 
   it('it should throw an error with code 500 if accessing the DB fails', function(done) {
@@ -65,6 +68,7 @@ describe('Auth Controller - Login', function() {
       .then(() => {
         expect(res.statusCode).to.be.equal(200)
         expect(res.userStatus).to.be.equal('I am new!')
+        done()
       })
   })
 
